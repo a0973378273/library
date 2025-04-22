@@ -248,16 +248,52 @@ class DKBlueToothRepositoryImpl(private val blueToothDataSource: BlueToothDataSo
             }
         }
 
-    override fun readWiredNetwork(blueToothAddress: String): Flow<DataStatus<DKWiredNetworkData>> {
-        TODO("Not yet implemented")
-    }
+    override fun readWiredNetwork(blueToothAddress: String): Flow<DataStatus<DKWiredNetworkData>> =
+        getDataStatusByFlow {
+            flow {
+                emit(getGatt(blueToothAddress))
+            }.flatMapConcat {
+                blueToothDataSource.readGatt(it, DKBlueToothUUID.SERVER.UUID, DKBlueToothUUID.WIRED_NETWORK_CONFIG.UUID, repeatTime = repeatTime)
+                    .take(1)
+                    .map { DKWiredNetworkData.from(it) }
+            }
+        }
 
-    override fun setStaticIpInWiredNetwork(blueToothAddress: String, ipAddress: String, maskAddress: String, routerAddress: String): Flow<DataStatus<Unit>> {
-        TODO("Not yet implemented")
-    }
 
-    override fun setDynamicIpInWiredNetwork(blueToothAddress: String): Flow<DataStatus<Unit>> {
-        TODO("Not yet implemented")
-    }
+    override fun setStaticIpInWiredNetwork(blueToothAddress: String, ipAddress: String, maskAddress: String, routerAddress: String): Flow<DataStatus<Unit>> =
+        getDataStatusByFlow {
+            flow {
+                emit(getGatt(blueToothAddress))
+            }.debounce(DEBOUNCE_TIME).flatMapConcat { gatt ->
+                val ipBytes = ipAddress.split(".").map { it.toInt().toByte() }
+                val routerBytes = routerAddress.split(".").map { it.toInt().toByte() }
+                val maskBytes = maskAddress.split(".").map { it.toInt().toByte() }
+                val byteArray = byteArrayOf(0x00) + (ipBytes + routerBytes + maskBytes).toByteArray()
+                blueToothDataSource.writeGatt(
+                    gatt,
+                    DKBlueToothUUID.SERVER.UUID,
+                    DKBlueToothUUID.WIRED_NETWORK_CONFIG.UUID,
+                    byteArray,
+                    repeatTime = repeatTime
+                )
+            }
+        }
+
+
+    override fun setDynamicIpInWiredNetwork(blueToothAddress: String): Flow<DataStatus<Unit>> =
+        getDataStatusByFlow {
+            flow {
+                emit(getGatt(blueToothAddress))
+            }.debounce(DEBOUNCE_TIME).flatMapConcat { gatt ->
+                val byteArray = byteArrayOf(0x02, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                blueToothDataSource.writeGatt(
+                    gatt,
+                    DKBlueToothUUID.SERVER.UUID,
+                    DKBlueToothUUID.WIRED_NETWORK_CONFIG.UUID,
+                    byteArray,
+                    repeatTime = repeatTime
+                )
+            }
+        }
 
 }

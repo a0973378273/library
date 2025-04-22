@@ -12,4 +12,24 @@ data class DKWiredNetworkData(
     val deviceIp: String = "0.0.0.0",
     val routerIp: String = "0.0.0.0",
     val maskIp: String = "0.0.0.0"
-)
+
+){
+    companion object {
+        fun from(data: ByteArray): DKWiredNetworkData {
+
+            val isDynamicIp = ((data[0].toInt() shr 1) and 0x01) == 1
+            val isCableDetection = ((data[0].toInt() shr 2) and 0x01) == 1
+            val deviceIp = data.slice(1..4).joinToString(".") { it.toUByte().toString() }
+            val gatewayIp = data.slice(5..8).joinToString(".") { it.toUByte().toString() }
+            val subnetMask = data.slice(9..12).joinToString(".") { it.toUByte().toString() }
+
+            return DKWiredNetworkData(
+                isDynamicIp = isDynamicIp,
+                isCableDetection = isCableDetection,
+                deviceIp = deviceIp,
+                routerIp = gatewayIp,
+                maskIp = subnetMask
+            )
+        }
+    }
+}

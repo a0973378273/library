@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "priv.bean.bluetooth"
+    namespace = "com.bean.datastore"
     compileSdk = 35
 
     defaultConfig {
@@ -38,13 +38,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Compose
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose)
+    // Datastore
+    implementation(libs.datastore)
 
     // Koin
     implementation(libs.bundles.koin)
-
-    implementation(project(":common"))
-    
 }

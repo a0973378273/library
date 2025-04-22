@@ -65,6 +65,7 @@ interface DKBlueToothRepository {
      * @param password The WiFi password.
      */
     fun setWifi(dkBlueToothWIFIData: DKBlueToothWIFIData, password: String) : Flow<DataStatus<Unit>>
+
     /**
      * Set the OTP token.
      * @param blueToothAddress The bluetooth address.

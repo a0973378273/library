@@ -100,25 +100,25 @@ class MainActivity : ComponentActivity() {
 //            onError = { println(it.message) }
 //        )
 
-        readWiredNetworkUseCase(
-            bluetoothAddress = blueToothAddress,
-            onSuccess = { dkWiredNetworkData = it },
-            onError = { println(it.message) }
-        )
-
-        setStaticIpInWiredNetworkUseCase(
-            blueToothAddress = blueToothAddress,
-            ipAddress = ipAddress,
-            maskAddress = maskAddress,
-            routerAddress = routerAddress,
-            onSuccess = { println("設置成功") },
-            onError = { println(it.message) }
-        )
-
-        setDynamicIpInWiredNetworkUseCase(
-            blueToothAddress = blueToothAddress,
-            onSuccess = { println("設置成功") },
-            onError = { println(it.message) }
-        )
+//        readWiredNetworkUseCase(
+//            bluetoothAddress = blueToothAddress,
+//            onSuccess = { dkWiredNetworkData = it },
+//            onError = { println(it.message) }
+//        )
+//
+//        setStaticIpInWiredNetworkUseCase(
+//            blueToothAddress = blueToothAddress,
+//            ipAddress = ipAddress,
+//            maskAddress = maskAddress,
+//            routerAddress = routerAddress,
+//            onSuccess = { println("設置成功") },
+//            onError = { println(it.message) }
+//        )
+//
+//        setDynamicIpInWiredNetworkUseCase(
+//            blueToothAddress = blueToothAddress,
+//            onSuccess = { println("設置成功") },
+//            onError = { println(it.message) }
+//        )
     }
 }

@@ -84,5 +84,8 @@ enum class DKBlueToothUUID(val UUID:String) {
      *
      * CRC16: uint16_t, 2 bytes, Little-Endian. The CRC16 of all bytes before these 2 bytes. Please refer to CRC16 calculation.
      */
-    WIFI_SCANNING_RESULTS("0D27FB94-F0D4-469D-AFD3-605A6EBBDB13")
+    WIFI_SCANNING_RESULTS("0D27FB94-F0D4-469D-AFD3-605A6EBBDB13"),
+
+    WIRED_NETWORK_CONFIG("0D27FB97-F0D4-469D-AFD3-605A6EBBDB13")
+
 }

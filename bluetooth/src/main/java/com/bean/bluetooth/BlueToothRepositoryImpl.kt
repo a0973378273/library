@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.onEach
 
 class BlueToothRepositoryImpl(private val blueToothDataSource: BlueToothDataSource) :
     BlueToothRepository {
-        private val repeatTime = 200L
+    private val repeatTime = 200L
 
     private var bluetoothDeviceDataList = mutableListOf<BlueToothData>()
     private fun getDeviceData(blueToothAddress: String): BlueToothData {

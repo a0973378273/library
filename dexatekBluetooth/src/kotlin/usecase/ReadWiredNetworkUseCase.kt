@@ -1,7 +1,6 @@
 package usecase
 
 import com.dexatek.bluetooth.DKBlueToothRepository
-import com.dexatek.bluetooth.data.DKBlueToothWIFIData
 import com.dexatek.bluetooth.data.DKWiredNetworkData
 import com.dexatek.bluetooth.tool.DataStatus
 import kotlinx.coroutines.CoroutineScope

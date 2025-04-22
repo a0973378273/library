@@ -1,6 +1,5 @@
 package usecase
 
-import com.bean.bluetooth.BlueToothRepository
 import com.dexatek.bluetooth.DKBlueToothRepository
 import com.dexatek.bluetooth.tool.DataStatus
 import kotlinx.coroutines.CoroutineScope

@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.Flow
  *     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
  */
 interface BlueToothRepository {
+
     /**
      * Start discovering nearby devices.
      * @param discoveryTime The time to discover devices. default is null.

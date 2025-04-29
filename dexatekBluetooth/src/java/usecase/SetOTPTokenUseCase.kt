@@ -1,7 +1,7 @@
 package usecase;
 
 import com.dexatek.bluetooth.DKBlueToothRepository
-import com.dexatek.bluetooth.tool.DataStatus
+import com.dexatek.bluetooth.DataStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

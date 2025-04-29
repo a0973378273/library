@@ -129,7 +129,9 @@ test = [
     "kotlinx-coroutines-test",
     "mockwebserver",
     "koin-test",
-    "koin-test-junit5"
+#    "koin-test-junit5",
+    "junit",
+    "androidx-junit"
 ]
 compose = [
     "androidx-ui-graphics",
@@ -146,4 +148,3 @@ mqtt = [
 datastore = [
     "datastore"
 ]
-

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "priv.bean.bluetooth"
+    namespace = "com.bean.bluetooth"
     compileSdk = 35
 
     defaultConfig {

@@ -3,15 +3,11 @@ package com.dexatek.bluetooth
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.util.Log
-import com.bean.bluetooth.BlueToothDataSource
-import com.bean.bluetooth.BlueToothException
 import com.dexatek.bluetooth.data.DKBlueToothData
 import com.dexatek.bluetooth.data.DKBlueToothWIFIData
 import com.dexatek.bluetooth.data.DKBlueToothPairingState
 import com.dexatek.bluetooth.data.DKBlueToothUUID
 import com.dexatek.bluetooth.data.DKWiredNetworkData
-import com.dexatek.bluetooth.tool.DataStatus
-import com.dexatek.bluetooth.tool.getDataStatusByFlow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.debounce
@@ -142,6 +138,7 @@ class DKBlueToothRepositoryImpl(private val blueToothDataSource: BlueToothDataSo
 
     override fun setWifi(dkBlueToothWIFIData: DKBlueToothWIFIData, password: String): Flow<DataStatus<Unit>> {
         val newDKBlueToothWIFIData = dkBlueToothWIFIData.setPassword(password)
+//        println("setWifi: ${newDKBlueToothWIFIData.toWIFICredential().joinToString { it.joinToString(separator = ":") { "%02X".format(it) }}}")
         return getDataStatusByFlow {
             flow { emit(getGatt(dkBlueToothWIFIData.bluetoothAddress)) }
                 .debounce(DEBOUNCE_TIME)
@@ -269,6 +266,7 @@ class DKBlueToothRepositoryImpl(private val blueToothDataSource: BlueToothDataSo
                 val routerBytes = routerAddress.split(".").map { it.toInt().toByte() }
                 val maskBytes = maskAddress.split(".").map { it.toInt().toByte() }
                 val byteArray = byteArrayOf(0x00) + (ipBytes + routerBytes + maskBytes).toByteArray()
+//                println("setStaticIpInWiredNetwork byteArray: ${byteArray.joinToString(separator = ":") { "%02X".format(it) }}")
                 blueToothDataSource.writeGatt(
                     gatt,
                     DKBlueToothUUID.SERVER.UUID,

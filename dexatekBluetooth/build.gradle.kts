@@ -51,6 +51,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
 }
 
 dependencies {
@@ -58,12 +59,15 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(project(":bluetooth"))
-    implementation(project(":common"))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+//    implementation(project(":bluetooth"))
+//    implementation(project(":common"))
+//    testImplementation(libs.junit)
+//    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     // Koin
     implementation(libs.bundles.koin)
+
+    // Test
+    androidTestImplementation(libs.bundles.test)
 }

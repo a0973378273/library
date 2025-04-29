@@ -1,7 +1,7 @@
 package usecase
 
 import com.dexatek.bluetooth.DKBlueToothRepository
-import com.dexatek.bluetooth.tool.DataStatus
+import com.dexatek.bluetooth.DataStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +15,10 @@ class ReadMACAddressUseCase(private val dkBluetoothRepository: DKBlueToothReposi
         CoroutineScope(Dispatchers.IO).launch {
             dkBluetoothRepository.readMacAddress(bluetoothAddress).collect { result ->
                 when (result) {
-                    is DataStatus.Success -> onSuccess(result.data.toString())
+                    is DataStatus.Success -> {
+                        val macAddress = result.data.joinToString(separator = ":") { "%02X".format(it) }
+                        onSuccess(macAddress)
+                    }
                     is DataStatus.Failed -> onError(result.exception)
                 }
             }

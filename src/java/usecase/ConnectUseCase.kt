@@ -1,10 +1,10 @@
 package usecase
 
-import com.dexatek.bluetooth.DKBlueToothRepository
-import com.dexatek.bluetooth.tool.DataStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.dexatek.bluetooth.DataStatus
+import com.dexatek.bluetooth.DKBlueToothRepository
 
 class ConnectUseCase(private val dkBluetoothRepository: DKBlueToothRepository) {
     fun interface JavaCallback {

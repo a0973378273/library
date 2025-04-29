@@ -55,4 +55,8 @@ class StartDiscoveryUseCaseTest : KoinTest {
 
         assert(results.isNotEmpty()) { "Expected non-empty results after 10 seconds" }
     }
+
+    fun test(){
+
+    }
 }
